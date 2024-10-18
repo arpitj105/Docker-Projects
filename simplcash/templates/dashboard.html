@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplCash - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.svg') }}" alt="SimplCash Logo" class="logo">
+        <h1>SimplCash Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        
+        <h2>Add Expense</h2>
+        <form action="{{ url_for('add_expense') }}" method="post">
+            <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+            <input type="text" name="description" placeholder="Description">
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <h2>View Expenses</h2>
+        <div id="expenses-list">
+            {% if expenses %}
+                {% for expense in expenses %}
+                    <div class="expense-item">
+                        <span class="amount">${{ "%.2f"|format(expense[0]) }}</span>
+                        <p class="description">{{ expense[1] }}</p>
+                        <small>{{ expense[2].strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No expenses found.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
