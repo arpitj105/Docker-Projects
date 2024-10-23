@@ -10,7 +10,7 @@ pipeline{
         stage("Code"){
             steps{
             git url: "https://github.com/arpitj105/Docker-Projects.git", branch: "master"    
-            echo "Code clone ho gya hai"
+            
                 
             }
         }
@@ -18,7 +18,7 @@ pipeline{
             steps{
                 dir("simplcash"){
                     sh "docker build -t simplcash-app-jenkins:latest ."    
-                    echo "docker ke through build ho gya"
+                    
                     
                 }
             
@@ -50,7 +50,7 @@ pipeline{
             sh "sleep 30"
             sh "docker run -d -p 5002:5000 -v simplcash-mysql:/var/lib/mysql --network simplcash-network -e MYSQL_HOST=simplcashmysql -e MYSQL_USER=root -e MYSQL_PASSWORD=root -e MYSQL_DB=simplcashdb -e SECRET_KEY=test --name simplcashflask simplcash-app-jenkins:latest"
             
-            echo "Docker run se app chlne laga"}
+            }
             }
         }
     }
