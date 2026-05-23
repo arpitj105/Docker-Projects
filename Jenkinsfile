@@ -1,10 +1,9 @@
 @Library('Shared')
-pipeline{
+pipeline {
+    agent {label 'Node'}
     
-    agent{
-        node{
-            label "dev"
-        }
+    environment{
+        SONAR_HOME = tool "Sonar"
     }
     
     stages{
