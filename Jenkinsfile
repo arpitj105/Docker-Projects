@@ -72,19 +72,37 @@ pipeline {
         stage("Docker: Build Images"){
             steps{
                 script{
-                        dir('backend'){
-                            docker_build("SimplCash","${params.BACKEND_DOCKER_TAG}","trainwithshubham")
+                        dir('Database'){
+                            docker_build("SimplCash","${params.DATABASE_DOCKER_TAG}","arpitjd105")
                         }
-                    
-                        dir('frontend'){
-                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","trainwithshubham")
-                        }
+            
+                            docker_build("SimplCash","${params.SIMPLCASH_DOCKER_TAG}","arpitjd105")
+                        
                 }
             }
         }
-        
 
+        stage("Docker: Push to DockerHub"){
+            steps{
+                script{
+                    docker_push("SimplCash","${params.SIMPLCASH_DOCKER_TAG}","arpitjd105") 
+                    docker_push("SimplCash","${params.DATABASE_DOCKER_TAG}","arpitjd105")
+                }
+            }
+        }
+    }
 
+    post{
+        success{
+            archiveArtifacts artifacts: '*.xml', followSymlinks: false
+            build job: "Simplcash-CD", parameters: [
+                string(name: 'SIMPLCASH_DOCKER_TAG', value: "${params.SIMPLCASH_DOCKER_TAG}"),
+                string(name: 'DATABASE_DOCKER_TAG', value: "${params.DATABASE_DOCKER_TAG}")
+            ]
+        }
+    }
+
+} 
 
 
 
@@ -183,5 +201,5 @@ pipeline {
         //     }
         //     }
         // }
-    }
-}
+//     }
+// }
