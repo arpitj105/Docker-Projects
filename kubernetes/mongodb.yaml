@@ -1,43 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-deployment
-  namespace: wanderlust
+  name: mysql-deployment
+  namespace: simplcash
   labels:
-    app: mongo
+    app: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo
+      app: mysql
   template:
     metadata:
-      name: mongo
+      name: mysql
       labels:
-        app: mongo
+        app: mysql
     spec:
       containers:
-        - name: mongo
-          image: mongo
+        - name: mysql
+          image: mysql
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-storage
+            - name: mysql-storage
               mountPath: /data/db
       volumes:
-        - name: mongo-storage
+        - name: mysql-storage
           persistentVolumeClaim:
-            claimName: mongo-pvc
+            claimName: mysql-pvc
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-service
-  namespace: wanderlust
+  name: mysql-service
+  namespace: simplcash
 spec:
   selector:
-    app: mongo
+    app: mysql
   ports:
     - port: 27017
       targetPort: 27017
