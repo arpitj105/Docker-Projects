@@ -95,7 +95,7 @@ pipeline {
     post{
         success{
             archiveArtifacts artifacts: '*.xml', followSymlinks: false
-            build job: "Wanderlust-CD", parameters: [
+            build job: "Simplcash-CD", parameters: [
                 string(name: 'SIMPLCASH_DOCKER_TAG', value: "${params.SIMPLCASH_DOCKER_TAG}"),
                 string(name: 'DATABASE_DOCKER_TAG', value: "${params.DATABASE_DOCKER_TAG}")
             ]
