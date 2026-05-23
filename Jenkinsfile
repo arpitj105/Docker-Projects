@@ -41,17 +41,17 @@ pipeline{
             }
         }
         
-        stage("Deploy"){
-            steps{
-            dir("simplcash"){
-            sh "docker network create simplcash-network || true" 
-            sh "sleep 30"
-            sh "docker run -d -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=simplcashdb --network simplcash-network -v simplcash-mysql:/var/lib/mysql --name simplcashmysql mysql:5.7"
-            sh "sleep 30"
-            sh "docker run -d -p 5002:5000 -v simplcash-mysql:/var/lib/mysql --network simplcash-network -e MYSQL_HOST=simplcashmysql -e MYSQL_USER=root -e MYSQL_PASSWORD=root -e MYSQL_DB=simplcashdb -e SECRET_KEY=test --name simplcashflask simplcash-app-jenkins:latest"
+        // stage("Deploy"){
+        //     steps{
+        //     dir("simplcash"){
+        //     sh "docker network create simplcash-network || true" 
+        //     sh "sleep 30"
+        //     sh "docker run -d -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=simplcashdb --network simplcash-network -v simplcash-mysql:/var/lib/mysql --name simplcashmysql mysql:5.7"
+        //     sh "sleep 30"
+        //     sh "docker run -d -p 5002:5000 -v simplcash-mysql:/var/lib/mysql --network simplcash-network -e MYSQL_HOST=simplcashmysql -e MYSQL_USER=root -e MYSQL_PASSWORD=root -e MYSQL_DB=simplcashdb -e SECRET_KEY=test --name simplcashflask simplcash-app-jenkins:latest"
             
-            }
-            }
-        }
+        //     }
+        //     }
+        // }
     }
 }
