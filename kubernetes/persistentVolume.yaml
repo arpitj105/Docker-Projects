@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mongo-pv
-  namespace: wanderlust
+  name: mysql-pv
+  namespace: simplcash
 spec:
   capacity:
     storage: 5Gi
