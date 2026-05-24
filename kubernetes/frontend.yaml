@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: arpitjd105/simplcash:v2.2
+          image: arpitjd105/simplcash:v4
           ports:
             - containerPort: 5173
 ---
