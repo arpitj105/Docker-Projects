@@ -20,7 +20,7 @@ spec:
         - name: frontend
           image: arpitjd105/simplcash:v5
           ports:
-            - containerPort: 5173
+            - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +32,7 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 5173
-      targetPort: 5173
+    - port: 5000
+      targetPort: 5000
       protocol: TCP
       nodePort: 31000
