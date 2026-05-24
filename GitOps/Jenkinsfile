@@ -39,13 +39,13 @@ pipeline {
                 script{
                     dir('kubernetes'){
                         sh """
-                            sed -i -e s|arpitjd105/simplcash-db.*|arpitjd105/simplcash-db:${params.DATABASE_DOCKER_TAG}/g backend.yaml
+                            sed -i -e s|arpitjd105/simplcash-db.*|arpitjd105/simplcash-db:${params.DATABASE_DOCKER_TAG}|g mongodb.yaml
                         """
                     }
                     
                     dir('kubernetes'){
                         sh """
-                            sed -i -e s|arpitjd105/simplcash.*|arpitjd105/simplcash:${params.SIMPLCASH_DOCKER_TAG}/g frontend.yaml
+                            sed -i -e s|arpitjd105/simplcash.*|arpitjd105/simplcash:${params.SIMPLCASH_DOCKER_TAG}|g frontend.yaml
                         """
                     }
                     
