@@ -310,11 +310,6 @@ kubectl get svc frontend-service -n simplcash
 - **Observability isn't a deploy-time concern.** Prometheus + Grafana had to be in place *before* I needed them — debugging without metrics is debugging blind.
 - **Email notifications matter more than dashboards.** Engineers don't check Jenkins; they check Gmail.
 
----
-
-## 🔗 Related Projects
-
-- [riddle-app](../riddle-app) — Earlier containerization exercise (same repo)
 
 ---
 
